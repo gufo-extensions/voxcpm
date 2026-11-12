@@ -1,0 +1,69 @@
+{
+ "server": "gufo",
+ "paragraph": "When the first light reaches the harbor, speak gently, with quiet confidence and a warm, resonant tone. The boats are still resting beside the old wooden pier, and the town is slowly waking to another bright morning.",
+ "variants": {
+  "short": {
+   "first_request_seconds": 0.9113864209502935,
+   "wav_seconds": 0.9085689330240712,
+   "wav_runs": [
+    0.9077110110083595,
+    0.9088160259416327,
+    0.9085689330240712
+   ],
+   "audio_seconds": 3.04,
+   "rtf": 0.2988713595473918,
+   "repeatable": true,
+   "first_pcm_seconds": 0.07945667707826942,
+   "complete_pcm_seconds": 0.9106861930340528,
+   "pcm_equals_wav": true
+  },
+  "auto": {
+   "first_request_seconds": 4.044014550978318,
+   "wav_seconds": 4.0515246340073645,
+   "wav_runs": [
+    4.0515246340073645,
+    4.051802784088068,
+    4.051428696024232
+   ],
+   "audio_seconds": 13.76,
+   "rtf": 0.2944421972389073,
+   "repeatable": true,
+   "first_pcm_seconds": 0.10004234791267663,
+   "complete_pcm_seconds": 4.059617735911161,
+   "pcm_equals_wav": true
+  },
+  "design": {
+   "first_request_seconds": 4.759708859957755,
+   "wav_seconds": 4.761456342996098,
+   "wav_runs": [
+    4.759740230045281,
+    4.761456342996098,
+    4.762660222942941
+   ],
+   "audio_seconds": 16.16,
+   "rtf": 0.2946445756804516,
+   "repeatable": true,
+   "first_pcm_seconds": 0.10540364100597799,
+   "complete_pcm_seconds": 4.773244643001817,
+   "pcm_equals_wav": true
+  },
+  "clone": {
+   "first_request_seconds": 5.209168525994755,
+   "wav_seconds": 4.56527255801484,
+   "wav_runs": [
+    4.56527255801484,
+    4.57101580791641,
+    4.560939900111407
+   ],
+   "audio_seconds": 15.04,
+   "rtf": 0.3035420583786463,
+   "repeatable": true,
+   "first_pcm_seconds": 0.19009479600936174,
+   "complete_pcm_seconds": 4.570327481022105,
+   "pcm_equals_wav": true
+  }
+ },
+ "ready_seconds": 8.704820925951935,
+ "resident_bytes": 336330752,
+ "gpu_bytes": 6221348864
+}

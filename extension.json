@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "name": "voxcpm",
+  "version": "0.1.0",
+  "api_version": ">= 0.3.0",
+  "depends": [],
+  "platforms": ["linux"],
+  "entry": "voxcpm_register",
+  "registration_target": "gufo_voxcpm",
+  "targets": {
+    "gufo_voxcpm": { "requires": [] },
+    "gufo_voxcpm_hip": { "requires": ["hip"] },
+    "gufo_voxcpm_tts": { "requires": ["hip"] },
+    "voxcpm_config_test": { "requires": ["testing"], "role": "test" },
+    "voxcpm_probe_test": { "requires": ["testing"], "role": "test" },
+    "voxcpm_tokenizer_test": { "requires": ["testing"], "role": "test" },
+    "voxcpm_weights_test": { "requires": ["testing"], "role": "test" },
+    "voxcpm_generator_test": { "requires": ["hip", "testing"], "role": "test" },
+    "voxcpm_vae_test": { "requires": ["hip", "testing"], "role": "test" },
+    "voxcpm_products_test": { "requires": ["hip", "testing"], "role": "test" },
+    "voxcpm_synthesize": { "requires": ["hip", "testing"], "role": "test" },
+    "voxcpm_gemm_bench": { "requires": ["hip", "testing"], "role": "test" }
+  },
+  "providers": [
+    {
+      "id": "voxcpm2",
+      "capability": "speech_synthesis",
+      "keys": ["safetensors:voxcpm2", "gguf:audiocpp"],
+      "model_ids": ["voxcpm2"],
+      "target": "gufo_voxcpm_tts",
+      "entry": "voxcpm2_provider_register",
+      "serving": { "voices": true }
+    }
+  ],
+  "licenses": [
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "licenses/gufo.txt",
+    "licenses/VoxCPM.txt",
+    "licenses/DAC.txt",
+    "licenses/CosyVoice.txt"
+  ]
+}
