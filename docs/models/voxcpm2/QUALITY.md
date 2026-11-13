@@ -2,7 +2,8 @@
 
 As of November 12, 2026: Gufo `f01a4570`, ROCm 10.1, Strix Halo, the
 `openbmb/VoxCPM2` checkpoint and audio.cpp's GGUFs, the extension's
-`gpu-test` build.
+`gpu-test` build. On Gufo 0.34.0 (`2845939b`), the revision `flake.nix`
+pins, the extension's 11 tests pass unchanged (November 13).
 
 ## Against the reference implementation
 

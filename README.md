@@ -113,8 +113,8 @@ synthetic media, such as labeling duties, may apply where you publish it.
 
 ## Build with Gufo
 
-The extension needs extension API 0.3.0 (Gufo `main`); `flake.lock` pins the
-revision it was built and tested with.
+The extension needs extension API 0.3 (Gufo 0.34.0 or a later 0.3 release);
+`flake.nix` pins the revision it was built and tested with.
 
 ```sh
 git clone https://github.com/gufo-org/gufo
