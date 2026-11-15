@@ -4,9 +4,9 @@ A community [Gufo](https://github.com/gufo-org/gufo) extension for
 [VoxCPM2](https://github.com/OpenBMB/VoxCPM), OpenBMB's tokenizer-free
 multilingual text-to-speech model, on AMD Strix Halo (`gfx1151`).
 
-> **Status:** work in progress, not released. Speech synthesis runs through
-> `gufo serve tts` with an automatic voice, voice design and voice cloning,
-> matches the reference implementation
+> **Status:** 0.1.0 builds against Gufo 0.34.0 (extension API 0.3).
+> Speech synthesis runs through `gufo serve tts` with an automatic voice,
+> voice design and voice cloning, matches the reference implementation
 > ([quality](docs/models/voxcpm2/QUALITY.md)) and is 1.8–1.9 times as fast as
 > audio.cpp with the same Q8_0 file, 2.4–2.5 times with bfloat16 weights
 > ([benchmarks](docs/models/voxcpm2/BENCHMARKS.md)).
@@ -143,8 +143,16 @@ implementation.
 [--stream]` is the development driver; `voxcpm_gemm_bench [REPEATS [q8]]`
 times the product kernels at the model's shapes.
 
+## Release history
+
+- 0.1.0 (2026-11-15): first release. VoxCPM2 from the Hugging Face directory
+  or audio.cpp's GGUFs through `gufo serve tts`: automatic voice, voice
+  design and voice cloning. Builds against Gufo 0.34.0 (`2845939b`) with
+  extension API 0.3.
+
 ## License
 
 The extension source is MIT licensed ([LICENSE](LICENSE)). Code adapted from
 other projects keeps their licenses; see
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+Maintainer: [@mduka](https://github.com/mduka).
