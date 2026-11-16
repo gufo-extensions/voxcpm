@@ -155,4 +155,9 @@ times the product kernels at the model's shapes.
 The extension source is MIT licensed ([LICENSE](LICENSE)). Code adapted from
 other projects keeps their licenses; see
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+This is an independent community project, not affiliated with or endorsed
+by OpenBMB or AMD. Model, product and company names belong to their owners
+and only identify the models and hardware the extension supports.
+
 Maintainer: [@mduka](https://github.com/mduka).
