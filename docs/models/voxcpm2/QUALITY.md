@@ -2,8 +2,9 @@
 
 As of November 12, 2026: Gufo `f01a4570`, ROCm 10.1, Strix Halo, the
 `openbmb/VoxCPM2` checkpoint and audio.cpp's GGUFs, the extension's
-`gpu-test` build. On Gufo 0.34.0 (`2845939b`), the revision `flake.nix`
-pins, the extension's 11 tests pass unchanged (November 13).
+`gpu-test` build. On Gufo 0.34.0 (`2845939b`, November 13) and on Gufo
+0.35.0 (`0260e116`, the revision `flake.nix` pins; November 17) the
+extension's 11 tests pass unchanged.
 
 ## Against the reference implementation
 
@@ -75,10 +76,9 @@ with both the Hugging Face weights and `voxcpm2-q8_0.gguf`.
 
 `tests/functional/model_services.py tts` checks `gufo serve tts` end to end
 (intelligibility through Qwen3-ASR, seeded replay, PCM, WAV and SSE equality,
-concurrent requests, rejections, cancellation). Its audio checks expect
-24 kHz; with that expectation changed to 48 kHz in a copy of the suite, the
-`base` variant (a cloned preset voice from the suite's recording) and the
-`design` variant pass all 11 checks, with the Hugging Face weights and with
-`voxcpm2-q8_0.gguf` (the copy also lets `--model` name a GGUF file instead
-of a directory with `config.json`). Unchanged, the suite fails its first
-synthesis on the sample rate.
+concurrent requests, rejections, cancellation). On Gufo 0.35.0 the `base`
+variant (a cloned preset voice from the suite's recording) and the `design`
+variant pass all 11 checks unchanged, with the Hugging Face weights and with
+`voxcpm2-q8_0.gguf`. Gufo 0.34.0's suite expects 24 kHz audio and accepts
+only a model directory; it passed the same checks in a copy with 48 kHz
+expected and a GGUF file allowed.

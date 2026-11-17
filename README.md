@@ -4,7 +4,7 @@ A community [Gufo](https://github.com/gufo-org/gufo) extension for
 [VoxCPM2](https://github.com/OpenBMB/VoxCPM), OpenBMB's tokenizer-free
 multilingual text-to-speech model, on AMD Strix Halo (`gfx1151`).
 
-> **Status:** 0.1.0 builds against Gufo 0.34.0 (extension API 0.3).
+> **Status:** 0.1.1 builds against Gufo 0.35.0 (extension API 0.3).
 > Speech synthesis runs through `gufo serve tts` with an automatic voice,
 > voice design and voice cloning, matches the reference implementation
 > ([quality](docs/models/voxcpm2/QUALITY.md)) and is 1.8–1.9 times as fast as
@@ -42,12 +42,19 @@ Other community GGUF conversions of VoxCPM2 use their own layouts and are
 not supported.
 
 The weights aren't part of this repository. OpenBMB publishes them under the
-Apache-2.0 license.
+Apache-2.0 license. `gufo model install voxcpm2` downloads the four files of
+the Hugging Face directory the provider loads (`7936080b`), and
+`gufo model install voxcpm2-q8` audio.cpp's Q8_0 file at the revision tested
+here (`661a224e`; audio.cpp replaced the file on November 15, and the new
+one is not tested). Both check SHA-256 against `models.lock.json`. With
+either ID as `--model` the server answers to the model name `voxcpm2`;
+`--served-model-name` adds names.
 
 ## Use
 
 ```sh
-MODEL=/models/VoxCPM2   # the Hugging Face directory, or an audio.cpp GGUF
+MODEL=/models/VoxCPM2   # the Hugging Face directory, an audio.cpp GGUF,
+                        # or voxcpm2 / voxcpm2-q8 once installed
 gufo serve tts --model "$MODEL" \
   --voice anna=/voices/anna.wav --voice-text anna=/voices/anna.txt
 ```
@@ -82,8 +89,6 @@ gufo serve tts --model "$MODEL" \
   2.4–2.5 times with bfloat16 weights. The local DiT's products, with their
   22 activation rows, read Q8_0 weights at about 72 % of the memory
   bandwidth ([experiments](docs/models/voxcpm2/EXPERIMENTS.md)).
-- Gufo's TTS functional suite expects 24 kHz audio; it passes with that
-  expectation changed to 48 kHz (see [quality](docs/models/voxcpm2/QUALITY.md)).
 - One request runs at a time; Gufo queues the others.
 - `gufo serve tts` limits the GPU to one hardware queue for speech models;
   set `GPU_MAX_HW_QUEUES=2` before starting it so that AudioVAE decodes
@@ -145,6 +150,11 @@ times the product kernels at the model's shapes.
 
 ## Release history
 
+- 0.1.1 (2026-11-18): `flake.nix` pins Gufo 0.35.0 (`0260e116`), whose TTS
+  suite takes the sample rate from the server; the tests and the suite pass
+  unchanged. `gufo model install voxcpm2` (or `voxcpm2-q8`) installs the
+  tested weights. The extension's code is unchanged and still builds
+  against Gufo 0.34.0, which ignores the model list.
 - 0.1.0 (2026-11-15): first release. VoxCPM2 from the Hugging Face directory
   or audio.cpp's GGUFs through `gufo serve tts`: automatic voice, voice
   design and voice cloning. Builds against Gufo 0.34.0 (`2845939b`) with

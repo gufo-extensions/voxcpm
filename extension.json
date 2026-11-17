@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "name": "voxcpm",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "api_version": ">= 0.3.0",
   "depends": [],
   "platforms": ["linux"],
@@ -30,6 +30,45 @@
       "target": "gufo_voxcpm_tts",
       "entry": "voxcpm2_provider_register",
       "serving": { "voices": true }
+    }
+  ],
+  "models": [
+    {
+      "id": "voxcpm2",
+      "provider": "voxcpm2",
+      "license": "apache-2.0",
+      "description": "OpenBMB VoxCPM2, safetensors",
+      "components": [
+        {
+          "role": "weights",
+          "option": "--model",
+          "install": "required",
+          "entry": ".",
+          "source": {
+            "hf": "openbmb/VoxCPM2",
+            "revision": "7936080b41163874f38610f46f438e2c0757f9fd"
+          },
+          "include": ["config.json", "model.safetensors", "audiovae.pth", "tokenizer.json"]
+        }
+      ]
+    },
+    {
+      "id": "voxcpm2-q8",
+      "provider": "voxcpm2",
+      "license": "apache-2.0",
+      "description": "OpenBMB VoxCPM2, audio.cpp's Q8_0 GGUF",
+      "components": [
+        {
+          "role": "weights",
+          "option": "--model",
+          "install": "required",
+          "source": {
+            "hf": "audio-cpp/audio.cpp-gguf",
+            "revision": "661a224e9d9adbd49c01626f85e426f5f425d771"
+          },
+          "include": ["VoxCPM2-GGUF/voxcpm2-q8_0.gguf"]
+        }
+      ]
     }
   ],
   "licenses": [
