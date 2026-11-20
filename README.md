@@ -89,6 +89,12 @@ gufo serve tts --model "$MODEL" \
   2.4–2.5 times with bfloat16 weights. The local DiT's products, with their
   22 activation rows, read Q8_0 weights at about 72 % of the memory
   bandwidth ([experiments](docs/models/voxcpm2/EXPERIMENTS.md)).
+- Like the reference, VoxCPM2 sometimes keeps speaking after the text: a
+  few extra syllables, now and then the whole sentence again. In 30 takes
+  of short sentences the reference did so 4 times, Gufo with the bfloat16
+  weights 2 times and with the Q8_0 file 8 times, audio.cpp with the same
+  file 9 times ([quality](docs/models/voxcpm2/QUALITY.md#end-of-speech)).
+  Another `seed` gives another take.
 - One request runs at a time; Gufo queues the others.
 - `gufo serve tts` limits the GPU to one hardware queue for speech models;
   set `GPU_MAX_HW_QUEUES=2` before starting it so that AudioVAE decodes

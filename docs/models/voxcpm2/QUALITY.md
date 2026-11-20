@@ -72,6 +72,35 @@ The 37-word benchmark paragraph ("When the first light reaches the harbor,
 speak gently, …"), automatic voice, seed 42, transcribes word for word
 with both the Hugging Face weights and `voxcpm2-q8_0.gguf`.
 
+## End of speech
+
+VoxCPM2's stop head decides after every patch whether the speech has ended
+(from the fourth patch on, the reference's rule, which the extension
+follows). Sometimes the model keeps speaking past the text: a few extra
+syllables ("… installed module SunSent") or the whole sentence again. On
+November 18 (Gufo 0.35.0), three short English sentences were spoken with
+the automatic voice and seeds 0 to 9 each and heard back with Nemotron 3.5
+ASR; a transcript with words after the sentence counts as a run-on:
+
+| Sentence | Reference, float32 | Gufo, Hugging Face weights | Gufo, `voxcpm2-q8_0.gguf` | audio.cpp, `voxcpm2-q8_0.gguf` |
+| --- | ---: | ---: | ---: | ---: |
+| This sentence comes from an installed module. | 2 | 1 | 4 | 6 |
+| The model was installed by its name. | 0 | 0 | 1 | 0 |
+| The little brown dog ran across the garden. | 2 | 1 | 3 | 3 |
+| Run-ons in 30 | 4 | 2 | 8 | 9 |
+
+The reference is OpenBMB's VoxCPM2Model (`300e426`) on the CPU, its
+`generate` with `retry_badcase` on, as the VoxCPM wrapper calls it; two of
+its four run-ons repeat the whole sentence, and so does one of audio.cpp's.
+audio.cpp ran its server (`f7ac446f`, Vulkan, offline mode). Each
+implementation draws its own noise from a seed, so the counts compare
+rates, not single outputs, and 30 takes separate only large differences:
+with the bfloat16 weights Gufo runs on about as often as the reference,
+with the Q8_0 file about as often as audio.cpp with that file, roughly
+twice as often as the reference. The retry at 6 patches per text token
+does not catch run-ons this short. One further Q8_0 take began with "That"
+instead of "The".
+
 ## Gufo's TTS functional suite
 
 `tests/functional/model_services.py tts` checks `gufo serve tts` end to end
